@@ -8,6 +8,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CartScreen from "./src/screens/CartScreen";
 import ProductDetailScreen from "./src/screens/ProductDetailScreen";
 import ProductsScreen from "./src/screens/ProductsScreen";
+// simulando una base de datos API
+import { products } from "./src/data/products";
+
+import { useEffect } from "react";
+import {useProductStore} from "./src/store/store";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,7 +31,15 @@ const CartStack = () => {
     </Stack.Navigator>
   );
 };
+
 export default function App() {
+  // get products from API
+  const setProducts = 
+  useProductStore((state) => state.setProducts);
+  useEffect(() => {
+    setProducts(products);
+  }, []);
+
   return (
     <NavigationContainer>
       <Tab.Navigator>

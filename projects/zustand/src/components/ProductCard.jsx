@@ -1,5 +1,11 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-const ProductCard = ({ product }) => {
+import { useCartStore } from "../store/store";
+const ProductCard = ({ product, hideButton = true }) => {
+  const addToCart = useCartStore((state) => state.addToCart);
+
+  const handleAddToCart = () => {
+    addToCart(product);
+  }
   return (
     <View style={styles.container}>
       <View>
@@ -10,14 +16,14 @@ const ProductCard = ({ product }) => {
         <Text>{product.name}</Text>
         <Text>{product.price}</Text>
       </View>
-      <View>
+      {hideButton && <View>
         <Pressable
           style={styles.buyButton}
-          onPress={() => console.log("Pressed")}
+          onPress={handleAddToCart}
         >
           <Text style={{ color: "white" }}>Comprar</Text>
         </Pressable>
-      </View>
+      </View>}
     </View>
   );
 };

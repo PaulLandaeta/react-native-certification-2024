@@ -1,11 +1,8 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import ProductCard from "../components/ProductCard";
-import { products } from "../data/products";
+import { useProductStore } from "../store/store";
 const ProductsScreen = () => {
-  const product = {
-    name: "Product 1",
-    price: 100,
-  };
+  const products = useProductStore((state) => state.products);
   return (
     <View style={styles.container}>
       <ScrollView>
