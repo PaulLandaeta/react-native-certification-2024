@@ -19,7 +19,7 @@ const ProductCard = ({ product, hideButton = true }) => {
       {hideButton && <View>
         <Pressable
           style={styles.buyButton}
-          onPress={handleAddToCart}
+          onPress={()=>handleAddToCart()}
         >
           <Text style={{ color: "white" }}>Comprar</Text>
         </Pressable>

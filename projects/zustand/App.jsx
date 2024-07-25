@@ -12,8 +12,9 @@ import ProductsScreen from "./src/screens/ProductsScreen";
 import { products } from "./src/data/products";
 
 import { useEffect } from "react";
-import {useProductStore} from "./src/store/store";
-
+import { useProductStore } from "./src/store/store";
+import CameraScreen from "./src/screens/CameraScreen";
+import { ThemeProvider } from "./src/context/ThemeContext";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const ProductStack = () => {
@@ -32,21 +33,32 @@ const CartStack = () => {
   );
 };
 
+const CameraStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Camera" component={CameraScreen} />
+    </Stack.Navigator>
+  );
+};
+
 export default function App() {
   // get products from API
-  const setProducts = 
-  useProductStore((state) => state.setProducts);
+  const setProducts = useProductStore((state) => state.setProducts);
   useEffect(() => {
     setProducts(products);
   }, []);
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Productos" component={ProductStack} />
-        <Tab.Screen name="Carrito" component={CartStack} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <ThemeProvider> 
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Productos" component={ProductStack} />
+          <Tab.Screen name="Carrito" component={CartStack} />
+          <Tab.Screen name="Camara" component={CameraStack} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
+    
   );
 }
 
