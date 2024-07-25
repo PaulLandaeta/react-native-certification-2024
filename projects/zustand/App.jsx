@@ -1,6 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import HomeScreen from "./src/screens/HomeScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -15,6 +12,7 @@ import { useEffect } from "react";
 import { useProductStore } from "./src/store/store";
 import CameraScreen from "./src/screens/CameraScreen";
 import { ThemeProvider } from "./src/context/ThemeContext";
+import SlideScreen from "./src/screens/SlidesScreen";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const ProductStack = () => {
@@ -29,6 +27,14 @@ const CartStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Cart" component={CartScreen} />
+    </Stack.Navigator>
+  );
+};
+
+const SlidesStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="slides" component={SlideScreen} />
     </Stack.Navigator>
   );
 };
@@ -52,6 +58,7 @@ export default function App() {
     <ThemeProvider> 
       <NavigationContainer>
         <Tab.Navigator>
+          <Tab.Screen name="Slides" component={SlidesStack} />
           <Tab.Screen name="Productos" component={ProductStack} />
           <Tab.Screen name="Carrito" component={CartStack} />
           <Tab.Screen name="Camara" component={CameraStack} />
@@ -60,13 +67,4 @@ export default function App() {
     </ThemeProvider>
     
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+};

@@ -1,4 +1,4 @@
-import { View, Button, StyleSheet, ScrollView } from "react-native";
+import { View, Button, ScrollView } from "react-native";
 import ProductCard from "../components/ProductCard";
 import { useProductStore } from "../store/store";
 import { useContext } from "react";

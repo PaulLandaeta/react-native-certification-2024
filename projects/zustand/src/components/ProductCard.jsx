@@ -1,29 +1,38 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
+import { useContext } from "react";
+
 import { useCartStore } from "../store/store";
+import { ThemeContext } from "../context/ThemeContext";
+import Title from "./Title";
+
 const ProductCard = ({ product, hideButton = true }) => {
   const addToCart = useCartStore((state) => state.addToCart);
-
+  const { colors } = useContext(ThemeContext);
   const handleAddToCart = () => {
     addToCart(product);
-  }
+  };
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        ...styles.container,
+        backgroundColor: colors.backgroundColorCard,
+      }}
+    >
       <View>
-        <Text>{product.name}</Text>
-        <Text>{product.price}</Text>
+        <Title texto={product.name} />
+        <Title texto={product.price} />
       </View>
       <View>
-        <Text>{product.name}</Text>
-        <Text>{product.price}</Text>
+        <Title texto={product.name} />
+        <Title texto={product.price} />
       </View>
-      {hideButton && <View>
-        <Pressable
-          style={styles.buyButton}
-          onPress={()=>handleAddToCart()}
-        >
-          <Text style={{ color: "white" }}>Comprar</Text>
-        </Pressable>
-      </View>}
+      {hideButton && (
+        <View>
+          <Pressable style={styles.buyButton} onPress={() => handleAddToCart()}>
+            <Text style={{ color: "white" }}>Comprar</Text>
+          </Pressable>
+        </View>
+      )}
     </View>
   );
 };
@@ -33,7 +42,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 100,
     width: "90%",
-    backgroundColor: "#6EACDA",
+    backgroundColor: "black",
     borderRadius: 10,
     paddingHorizontal: 20,
     marginHorizontal: 20,
@@ -46,6 +55,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
+  },
+  text: {
+    fontSize: 16,
   },
 });
 export default ProductCard;
